@@ -4,9 +4,16 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
       - uses: actions/checkout@v4
       - name: Install Dependencies
         run: npm install
       - name: Run Tests
+        env:
+          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+          MNEMONIC: ${{ secrets.MNEMONIC }}
         run: |
           npx hardhat test

@@ -14,13 +14,10 @@ describe("MyToken Contract", function () {
   let initialSupply = ethers.parseUnits("1000", 18);
 
   beforeEach(async function () {
-    // 获取合约工厂并部署合约
     MyToken = await ethers.getContractFactory("MyToken");
 
-    // 获取部署者和其他账户
     [owner, addr1, addr2] = await ethers.getSigners();
 
-    // 部署合约
     myToken = await MyToken.deploy(initialSupply);
     await myToken.waitForDeployment();
   });
